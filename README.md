@@ -2,12 +2,27 @@
 
 Utility functions for Zsh uses.
 
-## Search plugin command help
-I often found myself struggling to recall specific Zsh plugin commands. To avoid constantly referring to cheat sheets, here is a search function:
+## Installation
+
+- Requisites: Go 1.20
+
+Clone to local and use Go to build it:
+```bash
+git clone git@github.com:vuon9/zshs.git
+cd zshs
+go install ./cmd/zshs
+```
+
+Then it can be used anywhere by just typing `zshs`
+
+## Features
+
+### Search a plugin command
+I often found myself struggling to recall specific Zsh plugin commands. To avoid constantly referring to online cheat sheets, here is a search function:
 
 ```bash
-go run ./cmd/zshs/main.go kubectl 'get pods'
-go run ./cmd/zshs/main.go git 'pull --rebase'
+zshs kubectl 'get pods'
+zshs git 'pull --rebase'
 ```
 
 ## Checklist
