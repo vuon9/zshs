@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
+	"github.com/charmbracelet/glamour"
 	"github.com/urfave/cli/v2"
 	"github.com/vuon9/zshs/package/zshs"
-	"github.com/charmbracelet/glow"
 )
 
 func main() {
@@ -29,7 +29,14 @@ func main() {
 				for _, item := range result {
 					table += fmt.Sprintf("| %s | %s | %s |\n", item.Alias, item.Command, item.Description)
 				}
-				glow.Render(table)
+				gs := glamour.WithAutoStyle()
+				renderer, _ := glamour.NewTermRenderer(gs, glamour.WithWordWrap(150))
+				out, err := renderer.Render(table)
+				if err != nil {
+					fmt.Println(err)
+				}
+
+				fmt.Println(out)
 			} else {
 				fmt.Println("No results found.")
 			}
