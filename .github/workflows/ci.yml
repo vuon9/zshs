@@ -23,7 +23,7 @@ jobs:
         path: /home/runner/go
 
     - name: Build
-      run: go build -v ./...
+      run: go build -v ./cmd/zshs
 
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
