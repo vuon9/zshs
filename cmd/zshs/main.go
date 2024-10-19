@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
+	"github.com/charmbracelet/glamour"
 	"github.com/urfave/cli/v2"
 	"github.com/vuon9/zshs/package/zshs"
-	"github.com/charmbracelet/glamour"
 )
 
 func main() {
