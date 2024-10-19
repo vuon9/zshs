@@ -8,6 +8,7 @@ import (
 	"github.com/charmbracelet/glamour"
 	"github.com/urfave/cli/v2"
 	"github.com/vuon9/zshs/package/zshs"
+	"github.com/charmbracelet/glamour"
 )
 
 func main() {
@@ -24,19 +25,9 @@ func main() {
 			}
 
 			if len(result) > 0 {
-				table := "| Zsh Alias | Real Command | Description |\n"
-				table += "|-----------|--------------|-------------|\n"
-				for _, item := range result {
-					table += fmt.Sprintf("| %s | %s | %s |\n", item.Alias, item.Command, item.Description)
-				}
-				gs := glamour.WithAutoStyle()
-				renderer, _ := glamour.NewTermRenderer(gs, glamour.WithWordWrap(150))
-				out, err := renderer.Render(table)
-				if err != nil {
-					fmt.Println(err)
-				}
-
-				fmt.Println(out)
+				table := zshs.FormatAsMarkdownTable(result)
+				out, _ := glamour.Render(table, "dark")
+				fmt.Print(out)
 			} else {
 				fmt.Println("No results found.")
 			}
