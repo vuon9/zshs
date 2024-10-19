@@ -10,7 +10,13 @@ import (
 
 const pluginsFolder string = "/plugins"
 
-func SearchPluginCommandHelp(plugin string, keyword string, fromFolder string) ([]string, error) {
+type CommandHelp struct {
+	Alias       string
+	Command     string
+	Description string
+}
+
+func SearchPluginCommandHelp(plugin string, keyword string, fromFolder string) ([]CommandHelp, error) {
 	plugins := fromFolder + pluginsFolder
 	dirs, err := os.ReadDir(plugins)
 	if err != nil {
@@ -35,13 +41,24 @@ func SearchPluginCommandHelp(plugin string, keyword string, fromFolder string) (
 		return nil, err
 	}
 
-	matchedLines := []string{}
+	matchedLines := []CommandHelp{}
 	scanner := bufio.NewScanner(strings.NewReader(string(readmeContent)))
 
 	for scanner.Scan() {
 		line := scanner.Text()
 		if matched, _ := regexp.MatchString(fmt.Sprintf("(?m)%s", keyword), line); matched {
-			matchedLines = append(matchedLines, line)
+			slc := strings.Split(line, "|")
+			for j, slcp := range slc {
+				slc[j] = strings.TrimSpace(slcp)
+			}
+
+			if len(slc) > 3 {
+				matchedLines = append(matchedLines, CommandHelp{
+					Alias:       slc[1],
+					Command:     slc[2],
+					Description: slc[3],
+				})
+			}
 		}
 	}
 
@@ -49,18 +66,14 @@ func SearchPluginCommandHelp(plugin string, keyword string, fromFolder string) (
 		fmt.Fprintln(os.Stderr, "reading standard input:", err)
 	}
 
-	for i, match := range matchedLines {
-		slc := strings.Split(match, "|")
-		for j, slcp := range slc {
-			slc[j] = strings.TrimSpace(slcp)
-		}
-
-		if len(slc) > 3 {
-			matchedLines[i] = fmt.Sprintf("%s - %s: %s", slc[1], slc[2], slc[3])
-		} else {
-			continue
-		}
-	}
-
 	return matchedLines, nil
+}
+
+func FormatAsMarkdownTable(results []CommandHelp) string {
+	table := "| Zsh Alias | Real Command | Description |\n"
+	table += "|-----------|--------------|-------------|\n"
+	for _, item := range results {
+		table += fmt.Sprintf("| %s | %s | %s |\n", item.Alias, item.Command, item.Description)
+	}
+	return table
 }
