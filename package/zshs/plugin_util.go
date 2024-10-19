@@ -20,7 +20,7 @@ func SearchPluginCommandHelp(plugin string, keyword string, fromFolder string) (
 	plugins := fromFolder + pluginsFolder
 	dirs, err := os.ReadDir(plugins)
 	if err != nil {
-		panic(err)
+		return nil, fmt.Errorf("error: %v", err)
 	}
 
 	var readmeFile string

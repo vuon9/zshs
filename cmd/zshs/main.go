@@ -20,7 +20,8 @@ func main() {
 			keyword := ctx.Args().Get(1)
 			result, err := zshs.SearchPluginCommandHelp(plugin, keyword, os.Getenv("ZSH"))
 			if err != nil {
-				panic(err)
+				log.Fatal(err)
+				cli.ShowAppHelpAndExit(ctx, 1)
 			}
 
 			if len(result) > 0 {
