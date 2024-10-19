@@ -1,5 +1,7 @@
 # Zshs 🌟
 
+[![Build Status](https://github.com/vuon9/zshs/actions/workflows/ci.yml/badge.svg)](https://github.com/vuon9/zshs/actions)
+
 Utility functions for Zsh uses.
 
 ## Installation 📦
