@@ -25,11 +25,6 @@ zshs kubectl 'get pods'
 zshs git 'pull --rebase'
 ```
 
-## Checklist ✅
-
-- [ ] Build CI
-- [ ] Make the first release
-
 ## License 📜
 
 MIT License
