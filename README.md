@@ -1,8 +1,8 @@
-# Zshs
+# Zshs 🌟
 
 Utility functions for Zsh uses.
 
-## Installation
+## Installation 📦
 
 - Requisites: Go 1.20
 
@@ -15,9 +15,9 @@ go install ./cmd/zshs
 
 Then it can be used anywhere by just typing `zshs`
 
-## Features
+## Features ✨
 
-### Search a plugin command
+### Search a plugin command 🔍
 I often found myself struggling to recall specific Zsh plugin commands. To avoid constantly referring to online cheat sheets, here is a search function:
 
 ```bash
@@ -25,12 +25,12 @@ zshs kubectl 'get pods'
 zshs git 'pull --rebase'
 ```
 
-## Checklist
+## Checklist ✅
 
 - [ ] Build CI
 - [ ] Make the first release
 
-## License
+## License 📜
 
 MIT License
 
