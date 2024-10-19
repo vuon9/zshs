@@ -27,6 +27,19 @@ zshs kubectl 'get pods'
 zshs git 'pull --rebase'
 ```
 
+### Display all plugins as a checklist 📋
+You can now display all plugins as a checklist with their installation status:
+
+```bash
+zshs plugins
+```
+
+If a keyword is passed along with the 'plugins' command option, the checklist is filtered to show only the plugin matching the keyword:
+
+```bash
+zshs plugins <keyword>
+```
+
 ## License 📜
 
 MIT License
