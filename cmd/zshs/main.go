@@ -7,6 +7,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 	"github.com/vuon9/zshs/package/zshs"
+	"github.com/charmbracelet/glow"
 )
 
 func main() {
@@ -22,8 +23,15 @@ func main() {
 				panic(err)
 			}
 
-			for _, item := range result {
-				fmt.Println(item)
+			if len(result) > 0 {
+				table := "| Zsh Alias | Real Command | Description |\n"
+				table += "|-----------|--------------|-------------|\n"
+				for _, item := range result {
+					table += fmt.Sprintf("| %s | %s | %s |\n", item.Alias, item.Command, item.Description)
+				}
+				glow.Render(table)
+			} else {
+				fmt.Println("No results found.")
 			}
 
 			return nil
